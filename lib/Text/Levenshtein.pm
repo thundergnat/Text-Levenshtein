@@ -1,4 +1,4 @@
-unit module Text::Levenshtein;
+unit module Text::Levenshtein:ver<0.2.0>;
 
 sub distance ($s, *@t) is export {
 
@@ -6,26 +6,23 @@ sub distance ($s, *@t) is export {
 	my @result;
 
 	for @t -> $t {
-		@result.push(0) and next if $s eq $t;
-
-		my $m = $t.chars;
+		@result.push(0)  and next if $s eq $t;
+        @result.push($n) and next unless my $m = $t.chars;
 		@result.push($m) and next unless $n;
-		@result.push($n) and next unless $m;
 
 		my @d;
-		@d[0][0] = 0;
 
-		map { @d[$_][0] = $_ }, 1 .. $n;
-		map { @d[0][$_] = $_ }, 1 .. $m;
+		map { @d[$_; 0] = $_ }, 1 .. $n;
+		map { @d[0; $_] = $_ }, 0 .. $m;
 
 		for 1 .. $n -> $i {
 			my $s_i = $s.substr($i-1, 1);
 			for 1 .. $m -> $j {
-				@d[$i][$j] = min @d[$i-1][$j] + 1, @d[$i][$j-1] + 1,
-				  @d[$i-1][$j-1] + ($s_i eq $t.substr($j-1, 1) ?? 0 !! 1)
+				@d[$i; $j] = min @d[$i-1; $j] + 1, @d[$i; $j-1] + 1,
+				  @d[$i-1; $j-1] + ($s_i eq $t.substr($j-1, 1) ?? 0 !! 1)
 			}
 		}
-		@result.push: @d[$n][$m];
+		@result.push: @d[$n; $m];
 	}
 	return |@result;
 }
