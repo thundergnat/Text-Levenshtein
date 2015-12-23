@@ -1,4 +1,4 @@
-unit module Text::Levenshtein:ver<0.2.0>;
+unit module Text::Levenshtein:ver<0.2.0>:auth<github:thundergnat>;
 
 sub distance ($s, *@t) is export {
 
