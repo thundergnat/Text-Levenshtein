@@ -1,4 +1,4 @@
-unit module Text::Levenshtein:ver<0.2.1>:auth<github:thundergnat>;
+unit module Text::Levenshtein:ver<0.2.3>:auth<github:thundergnat>;
 
 sub distance ($s, *@t) is export {
 
@@ -24,27 +24,38 @@ sub distance ($s, *@t) is export {
         }
         @result.push: @d[$n; $m];
     }
-    return |@result;
+    @result
 }
 
 
 =begin pod
 =head1 NAME
 
-Text::Levenshtein - An implementation of the Levenshtein edit distance
+Text::Levenshtein - A port of the Perl 5 Text::Levenshtein
+
+[![Build Status](https://travis-ci.org/thundergnat/Text-Levenshtein.svg?branch=master)](https://travis-ci.org/thundergnat/Text-Levenshtein)
 
 =head1 SYNOPSIS
 
- use Text::Levenshtein qw(distance);
+Find the Levenshtein edit distance.
 
- print distance("foo","four");
- # prints "2"
+This is a direct port of the Perl 5 version and should be close to 100% similar
+other then some Perl 6 idioms. The fastdistance routine was not ported since the
+logic was buggy and the code to fix it made it the same speed as the regular
+distance routine.
 
- my @words=("four","foo","bar");
- my @distances=distance("foo",@words);
+=begin code
+use Text::Levenshtein qw(distance);
 
- print "@distances";
- # prints "2 0 3"
+print distance("foo","four");
+# prints "2"
+
+my @words=("four","foo","bar");
+my @distances=distance("foo",@words);
+
+print "@distances";
+# prints "2 0 3"
+=end code
 
 
 =head1 DESCRIPTION
@@ -54,7 +65,7 @@ The Levenshtein edit distance is a measure of the degree of proximity between tw
 This distance is the number of substitutions, deletions or insertions ("edits")
 needed to transform one string into the other one (and vice versa).
 When two strings have distance 0, they are the same.
-A good point to start is: <http://www.merriampark.com/ld.htm>
+A good point to start is: L<http://www.merriampark.com/ld.htm>
 
 =head1 AUTHOR
 
