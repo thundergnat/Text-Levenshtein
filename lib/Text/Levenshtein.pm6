@@ -1,4 +1,4 @@
-unit module Text::Levenshtein:ver<0.2.3>:auth<github:thundergnat>;
+unit module Text::Levenshtein:ver<0.2.4>:auth<zef:thundergnat>;
 
 sub distance ($s, *@t) is export {
 
@@ -33,18 +33,17 @@ sub distance ($s, *@t) is export {
 
 Text::Levenshtein - A port of the Perl 5 Text::Levenshtein
 
-[![Build Status](https://travis-ci.org/thundergnat/Text-Levenshtein.svg?branch=master)](https://travis-ci.org/thundergnat/Text-Levenshtein)
-
 =head1 SYNOPSIS
 
 Find the Levenshtein edit distance.
 
 This is a direct port of the Perl 5 version and should be close to 100% similar
-other then some Perl 6 idioms. The fastdistance routine was not ported since the
+other then some Raku idioms. The fastdistance routine was not ported since the
 logic was buggy and the code to fix it made it the same speed as the regular
 distance routine.
 
-=begin code
+=begin code :lang<raku>
+
 use Text::Levenshtein qw(distance);
 
 print distance("foo","four");
@@ -55,6 +54,7 @@ my @distances=distance("foo",@words);
 
 print "@distances";
 # prints "2 0 3"
+
 =end code
 
 
@@ -70,7 +70,8 @@ A good point to start is: L<http://www.merriampark.com/ld.htm>
 =head1 AUTHOR
 
 Copyright 2002 Dree Mistrut <F<dree@friul.it>>
-perl6 port: 2010 Steve Schulze
+
+Raku port: 2010 Steve Schulze
 
 This package is free software and is provided "as is" without express
 or implied warranty.  You can redistribute it and/or modify it under
