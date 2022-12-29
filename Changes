@@ -1,4 +1,6 @@
 Revision history for Text-Levenshtein
 
 {{$NEXT}}
+
+0.2.4  2022-12-29T18:11:21-05:00
     - Migrate to teh fez ecosystem
